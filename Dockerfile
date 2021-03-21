@@ -66,5 +66,7 @@ RUN certtool --generate-privkey --outfile /opt/certs/server-key.pem && certtool 
 RUN certtool --generate-privkey --outfile /opt/certs/user-key.pem && certtool --generate-certificate --load-privkey /opt/certs/user-key.pem --load-ca-certificate /opt/certs/ca-cert.pem --load-ca-privkey /opt/certs/ca-key.pem --template /opt/certs/user-tmp --outfile /opt/certs/user-cert.pem
 # generate user.p12 [user-key, user-cert, ca-cert]
 RUN openssl pkcs12 -export -inkey /opt/certs/user-key.pem -in /opt/certs/user-cert.pem -certfile /opt/certs/ca-cert.pem -out /opt/certs/user.p12 -passout pass:616
+# generate user1.p12 [user-key, user-cert, ca-cert]
+RUN openssl pkcs12 -export -inkey /opt/certs/user-key.pem -in /opt/certs/user-cert.pem -certfile /opt/certs/ca-cert.pem -out /opt/certs/user1.p12 -passout pass:617
 
 CMD ["vpn_run"]
